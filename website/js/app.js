@@ -1,5 +1,5 @@
 //main variables like the api and the link of the open weather
-const weatherApi = 'e5d85cbfd9ce4e461d9d64828c6aa7a9';
+const weatherApi = 'e5d85cbfd9ce4e461d9d64828c6aa7a9&units=metric';
 const mainLink ='https://api.openweathermap.org/data/2.5/weather?'
 
 // Dynamic js date instance.
@@ -23,7 +23,7 @@ generateButton.addEventListener('click', function (generate) {
       }
   }
 
-//storing the feelings of the user
+  //storing the feelings of the user
 const userResponse = document.querySelector('.myInput').textContent;
   getWeatherData(zipCode, weatherApi)
   .then(tempreture => {
@@ -34,14 +34,14 @@ const userResponse = document.querySelector('.myInput').textContent;
       dateOutput = document.getElementById('date')
       tempOutput = document.getElementById('temp')
       contentOutput = document.getElementById('content')
-  
-      //printing the data in the most recent entry
+
+  //printing the data in the most recent entry
       tempreture = tempOutput.textContent = `${projectData.temp}`;
       feelings = contentOutput.textContent = feelings.value;
 
-      dateOutput.textContent = `${newDate} `;
-      tempOutput.textContent = `${tempreture} °F `;
-      contentOutput.textContent = `${feelings}`;
+      dateOutput.innerHTML = newDate;
+      tempOutput.innerHTML = `${Math.round(projectData.temp)} °C`;
+      contentOutput.innerHTML = feelings;
   
       postData('/projectData', projectData)
       .then(() => {
